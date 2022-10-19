@@ -4,7 +4,7 @@ const pixelRatio = window.devicePixelRatio;
 let monCanvas;
 let mesOutils;
 let screenDivider = 8;
-let rayon = 100;
+let rayon = 10;
 let angle = 0;
 let angleY = 0;
 let v1 = Math.random();
@@ -72,23 +72,24 @@ function dessine() {
   // on initialise la couleur du trait
   mesOutils.strokeStyle = "#999";
 
-  mesOutils.fillStyle = "lightgreen";
-  let posX = x + Math.cos(angle * (Math.PI / 180)) * rayon;
+ // mesOutils.fillStyle = "lightgreen";
+  let posX = x;
   let posY = y;
-  // mesOutils.beginPath();
-  // mesOutils.arc(posX, posY, 20, 0, 2 * Math.PI, false);
+  //mesOutils.beginPath();
+  //mesOutils.arc(posX, posY, 20, 0, 2 * Math.PI, false);
   // mesOutils.fill();
   // mesOutils.closePath();
 
-  mesOutils.fillStyle = "orange";
+ //mesOutils.fillStyle = "orange";
 
-  let _posX = posX;
-  let _posY = y + Math.sin(angleY * (Math.PI / 180)) * rayon;
-  // pointsLissajous.push({ x: _posX, y: _posY });
-  // mesOutils.beginPath();
-  // mesOutils.arc(_posX, _posY, 20, 0, 2 * Math.PI, false);
-  // mesOutils.fill();
-  // mesOutils.closePath();
+ for(let i=0; i<18; i++){
+  let _posX = posX + (i*100);
+  let _posY = y;
+  //pointsLissajous.push({ x: _posX, y: _posY });
+  mesOutils.beginPath();
+  mesOutils.arc(_posX, _posY, 20, 0, 2 * Math.PI, false);
+  mesOutils.fill();
+  mesOutils.closePath();
 
   //on dessine tous les points lissajous
 
@@ -98,7 +99,7 @@ function dessine() {
   mesOutils.arc(
     _posX,
     _posY,
-    Math.abs(sizeR * Math.sin(angle * (Math.PI / 180))),
+    Math.abs(sizeR * Math.sin(angle * (Math.PI / i))),
     0,
     2 * Math.PI,
     false
@@ -106,6 +107,8 @@ function dessine() {
   mesOutils.stroke();
   mesOutils.closePath();
 
+ }
+  
   // on fait augmenter l'angle
   angle += v1;
   if (angle > 360) {
